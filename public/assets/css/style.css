@@ -1,4 +1,8 @@
 
 body{
-    background-image: "assets/img/zac-durant-1108790-unsplash.jpg"
+    background-image: url("/assets/images/kal-loftus-763782-unsplash.jpg");
+}
+
+.card-body{
+    /* background-color: black; */
 }

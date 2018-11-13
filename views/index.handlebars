@@ -12,6 +12,55 @@
         <a class="nav-link disabled" href="#">Disabled</a>
     </li> --}}
 </ul>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Theory Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="create-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Movie/TV Name: </label>
+                        <input type="text" class="form-control new-title" id="name" value="testing" placeholder="Stranger Things">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary change-title">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Theory Post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="create-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Edit Post: </label>
+                        <input type="text" class="form-control new-post" id="name" placeholder="Stranger Things">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary  change-post">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div class="container">
     <div class="row">
@@ -26,9 +75,13 @@
             <div class="card" style="width: 100%;">
                 <div class="card-body">
                     <h5 class="card-title">
-                        {{#> childEntry}}
-                        {{child.media_name}}
-                        {{/childEntry}}
+                            {{#> childEntry}}
+                            {{child.media_name}}
+                            {{/childEntry}}
+                        <button type="button" class="btn btn-primary change-title-pen" data-toggle="modal" data-target="#exampleModal"
+                            id={{#> childEntry}} {{child.id}} {{/childEntry}}>
+                            <i class="tiny material-icons" id={{#> childEntry}} {{child.id}} {{/childEntry}}>edit</i>
+                        </button>
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">Created by:
                         {{#> childEntry}}
@@ -36,18 +89,24 @@
                         {{/childEntry}}
                     </h6>
                     <p class="card-text">
-                        {{#> childEntry}}
-                        {{child.theory}}
-                        {{/childEntry}}
+                            {{#> childEntry}}
+                            {{child.theory}}
+                            {{/childEntry}}
+                        <button type="button" class="btn btn-primary change-post-pen" data-content={{#> childEntry}}{{child.theory}}{{/childEntry}} data-toggle="modal" data-target="#exampleModal2"
+                            id={{#> childEntry}} {{child.id}} {{/childEntry}}>
+                            <i class="tiny material-icons" id={{#> childEntry}} {{child.id}} {{/childEntry}}>edit</i>
+                        </button>
                     </p>
-                    <p>Likes: 
+                    {{!-- how I store incoming handlebars data as a string on the data attribute object? --}}
+                    <p>Likes:
                         {{#> childEntry}}
                         {{child.likes}}
                         {{/childEntry}}
                     </p>
                     <a href="#" class="card-link">Comment</a>
                     <a href="#" class="card-link delete" id={{#> childEntry}} {{child.id}} {{/childEntry}}>Delete</a>
-                    <a href="#" class="card-link like" id={{#> childEntry}} {{child.id}} {{/childEntry}} type={{#> childEntry}} {{child.likes}} {{/childEntry}}>Like</a>
+                    <a href="#" class="card-link like" id={{#> childEntry}} {{child.id}} {{/childEntry}} type={{#> childEntry}}
+                        {{child.likes}} {{/childEntry}}>Like</a>
                 </div>
             </div>
             {{/each}}
@@ -58,7 +117,7 @@
             <form class="create-form">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Movie/TV Name: </label>
-                    <input type="text" class="form-control" id="name" placeholder="Stranger Things">
+                    <input type="text" class="form-control" id="name1" placeholder="Stranger Things">
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Username: </label>
@@ -66,7 +125,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Theory: </label>
-                    <textarea class="form-control" id="theoBody" rows="4"></textarea>
+                    <textarea class="form-control" id="theoBody" rows="4" placeholder="Put your best, misplaced spoiler here!"></textarea>
                 </div>
                 <button type="submit">Add Theory</button>
             </form>
