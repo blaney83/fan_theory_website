@@ -1,0 +1,75 @@
+<ul class="nav">
+    <li class="nav-item">
+        <a class="nav-link active" href="/">"Fan"ter</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/api/">API List</a>
+    </li>
+    {{!-- <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+    </li> --}}
+</ul>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Welcome to "FAN"ter</h1>
+            <h2>The best place to talk about your favorite movie/TV theories and ideas!</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            {{#each theories as |child|}}
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{#> childEntry}}
+                        {{child.media_name}}
+                        {{/childEntry}}
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Created by:
+                        {{#> childEntry}}
+                        {{child.creator}}
+                        {{/childEntry}}
+                    </h6>
+                    <p class="card-text">
+                        {{#> childEntry}}
+                        {{child.theory}}
+                        {{/childEntry}}
+                    </p>
+                    <p>Likes: 
+                        {{#> childEntry}}
+                        {{child.likes}}
+                        {{/childEntry}}
+                    </p>
+                    <a href="#" class="card-link">Comment</a>
+                    <a href="#" class="card-link delete" id={{#> childEntry}} {{child.id}} {{/childEntry}}>Delete</a>
+                    <a href="#" class="card-link like" id={{#> childEntry}} {{child.id}} {{/childEntry}} type={{#> childEntry}} {{child.likes}} {{/childEntry}}>Like</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <div class="col-4">
+            {{!-- for creating new theory --}}
+            <h3>Add a Theory!</h3>
+            <form class="create-form">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Movie/TV Name: </label>
+                    <input type="text" class="form-control" id="name" placeholder="Stranger Things">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Username: </label>
+                    <input type="text" class="form-control" id="user" placeholder="TheZuck">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Theory: </label>
+                    <textarea class="form-control" id="theoBody" rows="4"></textarea>
+                </div>
+                <button type="submit">Add Theory</button>
+            </form>
+        </div>
+    </div>
+</div>

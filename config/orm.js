@@ -15,11 +15,12 @@ function objToSql(obj){
     let arr = [];
     for(var key in obj){
         let value = obj[key];
-        if (Object.hasOwnProperty.call(obj,key)){
-            if(typeof value === "string" && value.indexOf(" ") >= 0){
-                value = "'" + value + "'";
-                arr.push(key + "=" + value);
-            }
+        console.log(typeof(value))
+        console.log(key)
+        if (Object.hasOwnProperty.call(obj, key)){
+                arr.push(key + " = '" + value + "'");
+                console.log(arr)
+            
         }
     }
     return arr.toString();
@@ -27,7 +28,7 @@ function objToSql(obj){
 
 let orm = {
     all: function(table, cb){
-        let queryString = "SELECT * FROM" + table + ";";
+        let queryString = "SELECT * FROM " + table + ";";
         connection.query(queryString, (err, result)=>{
             if (err) throw err;
             cb(result)
@@ -39,11 +40,13 @@ let orm = {
         connection.query(queryString, vals, (err, result)=>{
             if(err) throw err;
             console.log(vals);
-            console.log(results);
+            console.log(result);
             cb(result);
         })
     },
     update: function(table, objColVals, condition, cb){
+        console.log(objToSql(objColVals));
+        console.log(objColVals);
         let queryString = "UPDATE " + table + " SET " + objToSql(objColVals) + " WHERE " + condition;
         console.log(queryString);
         connection.query(queryString, (err, result)=>{
@@ -53,12 +56,13 @@ let orm = {
     },
     delete: function(table, condition, cb){
         let queryString = "DELETE FROM " + table + " WHERE " + condition;
+        console.log(queryString)
         connection.query(queryString, (err, result)=>{
             if(err) throw err;
             cb(result);
         })
     },
-    readName: function(table, condition, cd){
+    readName: function(table, condition, cb){
         let queryString = "SELECT creator FROM " + table + " WHERE " + condition;
         connection.query(queryString, (err, result)=>{
             if(err) throw err;
@@ -67,6 +71,4 @@ let orm = {
     }
 };
 
-module.exports = {
-    orm: orm
-}
+module.exports = orm;
