@@ -1,4 +1,5 @@
 $(function () {
+
     $(".create-form").on("submit", (event) => {
         event.preventDefault();
 
@@ -48,15 +49,20 @@ $(function () {
     });
 
     $(".change-title-pen").on("click", (event) => {
-        let title = event.target.data-content
         let id = event.target.id
+        let titleSelector = 'h5#' + id + '.card-title'
+        let theorySelector = 'p#' + id + '.card-text'
+        let titleValue = editPost(titleSelector)
+        let theoryValue = editPost(theorySelector)
+        $("input#name.new-title").attr("value", titleValue);
+        $("textarea#name.new-post").text(theoryValue);
         $(".change-title").on("click", (event) => {
             console.log(id)
             event.preventDefault();
             let updateTitle = {
-                media_name: $(".new-title").val().trim()
+                media_name: $(".new-title").val().trim(),
+                theory: $(".new-post").val().trim()
             }
-
             $.ajax("/api/theories/" + id, {
                 type: "PUT",
                 data: updateTitle
@@ -67,31 +73,19 @@ $(function () {
         });
     });
 
-    $(".change-post-pen").on("click", (event) => {
-    let xyz = $(".change-post-pen").attr("data")
-    console.log(xyz)
-    $("#name").attr("value", xyz)
-    })
-
-    $(".change-post-pen").on("click", (event) => {
-        // let xyz = event.target.data-content
-        let id = event.target.id
-        // $("#name").attr("value", xyz)
-        $(".change-post").on("click", (event) => {
-            console.log(id)
-            event.preventDefault();
-            let updateTheory = {
-                theory: $(".new-post").val().trim()
-            }
-
-            $.ajax("/api/theories/" + id, {
-                type: "PUT",
-                data: updateTheory
-            }).then(function () {
-                console.log("Changed Theory!");
-                location.reload();
-            })
-        });
-    })
-
+    function editPost(blerb) {
+        let messy = $(blerb).html();
+        messy.split();
+        if (messy.indexOf("<") >= 0) {
+            console.log("Hi Im a title because I have a <button>")
+            toString(messy)
+            let messyArray = messy.split("<")
+            let cleanText = messyArray[0].trim()
+            return cleanText;
+        } else {
+            console.log("Hi, Im a post because I only have text")
+            let cleanText = messy.trim()
+            return cleanText;
+        }
+    }
 })
