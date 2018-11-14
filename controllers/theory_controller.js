@@ -16,7 +16,6 @@ router.get("/", function (req, res) {
         };
         console.log(hbsObj);
         res.render("index", hbsObj)
-        // res.send(data)
     });
 });
 
@@ -32,7 +31,6 @@ router.get("/api/", function (req, res) {
         };
         console.log(hbsObj);
         res.json(hbsObj)
-        // res.send(data)
     });
 });
 
@@ -44,7 +42,6 @@ router.post("/api/theories", function (req, res) {
             req.body.media_name, req.body.creator, req.body.theory
         ], (result) => {
             console.log(result)
-            //returns id of new post to be used in the id of the html
             res.json({ id: result.id })
         })
 });

@@ -1,14 +1,25 @@
 <ul class="nav">
-    <li class="nav-item">
-        <a class="nav-link active" href="/">"Fan"ter</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/api/">API List</a>
-    </li>
+    <div class="container navCon" id="listen2me">
+        <div class="row navRow" >
+            <div class="col-8">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">"Fan"ter</a>
+                </li>
+            </div>
+            <div class="col-2 align-self-center">
+                <li class="nav-item align-self-center">
+                    <a class="nav-link" href="/api/" id="beSmall">API List</a>
+                </li>
+            </div>
+            <div class="col-2 align-self-center">
+
+                <li class="nav-item align-self-center">
+                    <a class="nav-link" href="#" id="beSmall">Sign Out</a>
+                </li>
+            </div>
+        </div>
+    </div>
     {{!-- <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>
     </li> --}}
 </ul>
@@ -44,17 +55,17 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 headCol">
             <h1>Welcome to "FAN"ter</h1>
             <h2>The best place to talk about your favorite movie/TV theories and ideas!</h2>
         </div>
     </div>
-    <div class="row">
-        <div class="col-8">
+    <div class="row contentRow">
+        <div class="col-8 conCol conCol1">
             {{#each theories as |child|}}
             <div class="card" style="width: 100%;">
                 <div class="card-body">
-                    <h5 class="card-title" id={{#> childEntry}} {{child.id}} {{/childEntry}}>
+                    <h5 class="card-title justify-content-between" id={{#> childEntry}} {{child.id}} {{/childEntry}}>
                         {{#> childEntry}}
                         {{child.media_name}}
                         {{/childEntry}}
@@ -90,7 +101,7 @@
             </div>
             {{/each}}
         </div>
-        <div class="col-4">
+        <div class="col-4 conCol conCol2">
             {{!-- for creating new theory --}}
             <h3>Add a Theory!</h3>
             <form class="create-form">
